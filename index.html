@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kripik Tempe Barokah</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fdf6ec;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #c0392b;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav .logo {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+        }
+
+        nav ul a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity .2s;
+        }
+
+        nav ul a:hover {
+            opacity: 0.75;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #c0392b, #e67e22);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 28px;
+        }
+
+        .hero a {
+            background: #fff;
+            color: #c0392b;
+            padding: 12px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: transform .2s;
+        }
+
+        .hero a:hover {
+            transform: scale(1.05);
+        }
+
+        /* SECTION */
+        section {
+            padding: 60px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            color: #c0392b;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        /* PRODUK */
+        .produk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform .2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 16px;
+        }
+
+        .card-body h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .card-body .harga {
+            color: #e67e22;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .card-body button {
+            width: 100%;
+            background: #c0392b;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background .2s;
+        }
+
+        .card-body button:hover {
+            background: #a93226;
+        }
+
+        /* TENTANG */
+        #tentang {
+            background: #fff3e0;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        #tentang p {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* FORM PESAN */
+        .form-wrap {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-wrap label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-wrap input,
+        .form-wrap select,
+        .form-wrap textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            outline: none;
+            transition: border .2s;
+        }
+
+        .form-wrap input:focus,
+        .form-wrap select:focus,
+        .form-wrap textarea:focus {
+            border-color: #c0392b;
+        }
+
+        .form-wrap button {
+            width: 100%;
+            background: #c0392b;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .form-wrap button:hover {
+            background: #a93226;
+        }
+
+        #status-msg {
+            margin-top: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            min-height: 24px;
+        }
+
+        #status-msg.sukses {
+            color: #27ae60;
+        }
+
+        #status-msg.gagal {
+            color: #c0392b;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #c0392b;
+            color: #fff;
+            text-align: center;
+            padding: 24px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                padding: 14px 20px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">🌶 Kripik Tempe Barokah</div>
+        <ul>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#pesan">Pesan</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Kripik Tempe Renyah & Gurih</h1>
+        <p>Dibuat dari tempe pilihan, digoreng sempurna, cocok untuk camilan keluarga.</p>
+        <a href="#pesan">Pesan Sekarang</a>
+    </div>
+
+    <!-- PRODUK -->
+    <section id="produk">
+        <h2>Produk Kami</h2>
+        <div class="produk-grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&q=80"
+                    alt="Kripik Tempe Original" />
+                <div class="card-body">
+                    <h3>Kripik Tempe Original</h3>
+                    <div class="harga">Rp 15.000 / 1Kg</div>
+                    <button onclick="pilihProduk('Kripik Tempe Original', 15000)">Pesan</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&q=80"
+                    alt="Kripik Tempe Menjes" />
+                <div class="card-body">
+                    <h3>Kripik Tempe Menjes</h3>
+                    <div class="harga">Rp 17.000 / 1Kg</div>
+                    <button onclick="pilihProduk('Kripik Tempe Menjes', 17000)">Pesan</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80"
+                    alt="Kripik Tempe Balado" />
+                <div class="card-body">
+                    <h3>Kripik Tempe Menjes Balado</h3>
+                    <div class="harga">Rp 18.000 / 1Kg</div>
+                    <button onclick="pilihProduk('Kripik Tempe menjes Balado', 18000)">Pesan</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80"
+                    alt="Kripik Tempe Sagu" />
+                <div class="card-body">
+                    <h3>Kripik Tempe Sagu</h3>
+                    <div class="harga">Rp 20.000 / 1Kg</div>
+                    <button onclick="pilihProduk('Kripik Tempe Sagu', 20000)">Pesan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section>
+        <div id="tentang">
+            <h2>Tentang Kami</h2>
+            <p>
+                Kripik Tempe Barokah telah berdiri sejak 2010, menghadirkan camilan tradisional
+                berbahan tempe segar berkualitas tinggi. Setiap produk dibuat dengan resep turun-temurun,
+                tanpa bahan pengawet, dan dikemas higienis agar tetap renyah sampai ke tangan Anda.
+            </p>
+        </div>
+    </section>
+
+    <!-- FORM PESAN -->
+    <section id="pesan">
+        <h2>Form Pemesanan</h2>
+        <div class="form-wrap">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required />
+
+            <label for="hp">No. WhatsApp</label>
+            <input type="tel" id="hp" placeholder="Contoh: 08123456789" required />
+
+            <label for="alamat">Alamat Pengiriman</label>
+            <textarea id="alamat" rows="3" placeholder="Jl. Merdeka No. 1, Kota..."></textarea>
+
+            <label for="produk">Pilih Produk</label>
+            <select id="produk">
+                <option value="Kripik Tempe Original">Kripik Tempe Original - Rp 15.000</option>
+                <option value="Kripik Tempe Pedas">Kripik Tempe Pedas - Rp 17.000</option>
+                <option value="Kripik Tempe Balado">Kripik Tempe Balado - Rp 18.000</option>
+                <option value="Kripik Tempe Keju">Kripik Tempe Keju - Rp 20.000</option>
+            </select>
+
+            <label for="jumlah">Jumlah (pcs)</label>
+            <input type="number" id="jumlah" min="1" value="1" />
+
+            <button onclick="kirimPesanan()">Kirim Pesanan</button>
+            <div id="status-msg"></div>
+        </div>
+    </section>
+<script>
+    function pilihProduk(nama, harga) {
+        document.getElementById("produk").value = nama;
+        document.getElementById("pesan").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function kirimPesanan() {
+        const nama = document.getElementById("nama").value.trim();
+        const hp = document.getElementById("hp").value.trim();
+        const alamat = document.getElementById("alamat").value.trim();
+        const produk = document.getElementById("produk").value;
+        const jumlah = document.getElementById("jumlah").value;
+        const statusEl = document.getElementById("status-msg");
+
+        if (!nama || !hp) {
+            statusEl.textContent = "⚠ Nama dan No. WhatsApp wajib diisi.";
+            statusEl.className = "gagal";
+            return;
+        }
+
+        // Format pesan WhatsApp
+        const pesan = `Halo, saya ingin memesan:
+        
+Nama: ${nama}
+No WA: ${hp}
+Alamat: ${alamat}
+Produk: ${produk}
+Jumlah: ${jumlah}
+
+Terima kasih.`;
+
+        const nomor = "6285124015001"; // format tanpa 0
+        const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+
+        // Buka WhatsApp
+        window.open(url, "_blank");
+
+        statusEl.textContent = "✅ Mengarahkan ke WhatsApp...";
+        statusEl.className = "sukses";
+    }
+</script>
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Kripik Tempe Barokah. Semua hak dilindungi.</p>
+        <p style="margin-top:6px; opacity:.8;">📍 Ds tiudan Kec gondang Kab Tulungagung &nbsp;|&nbsp; 📞 085233298205
+        </p>
+    </footer>
+
+    <script>
+        https://script.google.com/macros/s/AKfycbyukjzagroK5jk_9d938VVGybIMQUyyqNjD0uqlfmQY54DT1bc8BAJ0McpgDWhKKsLa/exec  
+        const APPS_SCRIPT_URL = "GANTI_DENGAN_URL_APPS_SCRIPT_ANDA";
+
+        function pilihProduk(nama, harga) {
+            document.getElementById("produk").value = nama;
+            document.getElementById("pesan").scrollIntoView({ behavior: "smooth" });
+        }
+
+        async function kirimPesanan() {
+            const nama = document.getElementById("nama").value.trim();
+            const hp = document.getElementById("hp").value.trim();
+            const alamat = document.getElementById("alamat").value.trim();
+            const produk = document.getElementById("produk").value;
+            const jumlah = document.getElementById("jumlah").value;
+            const statusEl = document.getElementById("status-msg");
+
+            if (!nama || !hp) {
+                statusEl.textContent = "⚠ Nama dan No. WhatsApp wajib diisi.";
+                statusEl.className = "gagal";
+                return;
+            }
+
+            statusEl.textContent = "⏳ Mengirim pesanan...";
+            statusEl.className = "";
+
+            const data = { nama, hp, alamat, produk, jumlah, waktu: new Date().toLocaleString("id-ID") };
+
+            try {
+                await fetch(APPS_SC-RIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                statusEl.textContent = "✅ Pesanan berhasil dikirim! Kami akan segera menghubungi Anda.";
+                statusEl.className = "sukses";
+
+                // reset form
+                ["nama", "hp", "alamat", "jumlah"].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") el.value = id === "jumlah" ? "1" : "";
+                });
+            } catch (e) {
+                statusEl.textContent = "❌ Gagal mengirim. Coba lagi atau hubungi kami via WhatsApp.";
+                statusEl.className = "gagal";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
